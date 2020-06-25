@@ -8,23 +8,27 @@ export class DomListener {
         this.$root = $root;
         this.listeners = listeners;
     }
+
     initDOMListeners() {
         this.listeners.forEach((listener) => {
             const method = getMethodName(listener);
             if (!this[method]) {
                 const name = this.name || '';
                 throw new Error(
-                 `Method ${method} is not implemented in ${name} Component`
+                    `Method ${method} is not implemented in ${name} Component`
                 );
             }
+            this[method] = this[method].bind(this);
             // Same as addEventListener
-            this.$root.on(listener, this[method].bind(this));
+            this.$root.on(listener, this[method]);
         });
     }
 
     removeDOMListereners() {
-        // realize
-
+        this.listeners.forEach((listener) => {
+            const method = getMethodName(listener);
+            this.$root.off(listener, this[method]);
+        });
     }
 }
 
