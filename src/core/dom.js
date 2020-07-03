@@ -46,6 +46,12 @@ class Dom {
     findAll(selector) {
         return this.$el.querySelectorAll(selector);
     }
+
+    css(styles = {}) {
+       Object.keys(styles).forEach((key) => {
+           this.$el.style[key] = styles[key];
+       });
+    }
 }
 
 $('div').html('<h1>Test</h1>').clear();
