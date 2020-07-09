@@ -8,9 +8,11 @@ import {TableSelection} from '@/components/table/TableSelection';
 export class Table extends ExcelComponent {
     static className = 'excel__table';
 
-    constructor($root) {
+    constructor($root, options) {
         super($root, {
+            name: 'Table',
             listeners: ['mousedown', 'keydown'],
+            ...options,
         });
     }
 
@@ -28,6 +30,10 @@ export class Table extends ExcelComponent {
         this.selection = new TableSelection();
         const $cell = this.$root.find('[data-id="0:0"]');
         this.selection.select($cell);
+        this.emitter.subscribe('it is working', (text) => {
+            this.selection.current.text(text);
+            console.log('table from formula', text);
+        });
     }
 
     onMousedown(event) {
