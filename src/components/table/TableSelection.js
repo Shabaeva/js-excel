@@ -4,7 +4,6 @@ export class TableSelection {
         this.group = [];
         this.current = null;
     }
-    // $el instanceOf DOM === true
     select($el) {
         this.clear();
         $el.focus().addClass(TableSelection.className);
