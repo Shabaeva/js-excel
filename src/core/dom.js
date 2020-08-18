@@ -21,7 +21,6 @@ class Dom {
         }
         return this.$el.textContent.trim();
     }
-
     clear() {
         this.html('');
         return this;
