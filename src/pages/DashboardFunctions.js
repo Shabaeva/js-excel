@@ -6,7 +6,10 @@ export function toHtml(key) {
     return `
        <li class="db__record">
            <a href="#excel/${id}">${model.title}</a>
-           <strong>12.06.2020</strong>
+           <strong>
+               ${new Date(model.openedDate).toLocaleDateString()}
+               ${new Date(model.openedDate).toLocaleTimeString()}
+           </strong>
        </li>  
     `;
 }
@@ -33,7 +36,7 @@ export function createRecordsTable() {
         return `
          <div class="db__list-header">
                 <span>Title</span>
-                <span>Create date</span>
+                <span>Opened date</span>
             </div>
             <ul class="db__list">
                 ${keys.map(toHtml).join('')}
